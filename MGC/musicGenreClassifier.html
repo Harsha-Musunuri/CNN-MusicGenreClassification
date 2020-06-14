@@ -1,0 +1,44 @@
+<html>
+<head>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"> </script>   
+</head> 
+<body>
+<div id="output" style="font-family:courier;font-size:24px;height=300px"></div>    
+</body> 
+<script>
+    const outp = document.getElementById('output');
+    async function run(){
+        const MODEL_URL = 'http://127.0.0.1:8887/MGC/model.json';
+        const model = await tf.loadLayersModel(MODEL_URL);
+        console.log(model.summary());
+        const input = tf.tensor2d([[ 0.96546884, -0.60432508,  2.9084364 ,  1.65278148,  2.13134518,
+         2.8766552 ,  0.24138008, -2.65582064,  1.56655814,  0.05785628,
+         0.85325791, -0.13707474,  0.84092522, -0.39702729,  1.33805434,
+        -0.76037536,  1.1608343 , -0.26780637,  1.10735701, -0.69896294,
+         1.22553144,  0.45750671,  0.41584364,  0.58638454,  1.04949089,
+        -0.77041065]], [1,26]);
+        const result = model.predict(input);
+        function indexOfMax(arr) {
+        if (arr.length === 0) {
+        return -1;
+        }
+        var max = arr[0];
+        var maxIndex = 0;
+        for (var i = 1; i < arr.length; i++) {
+        if (arr[i] > max) {
+            maxIndex = i;
+            max = arr[i];
+            }
+        }
+        return maxIndex;
+        }
+        var i = indexOfMax(result)
+        var genres = ["blues", "classical", "country", "disco", "hiphop", "jazz" ,"metal", "pop" ,"reggae", "rock"]
+        
+    
+        outp.innerHTML += genres[i];
+            }
+	
+	run();
+</script>
+</html>

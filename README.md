@@ -12,5 +12,5 @@ conda install -c conda-forge librosa - to Install
 Compare Actual genres vs Predicted genres via Confusion matrix, RMSE, MAE, etc.
 
 # Web App
-Use Flask to deploy
+Tensoflow Js: use to deploy the model
 
